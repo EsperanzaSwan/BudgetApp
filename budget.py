@@ -1,3 +1,5 @@
+from datetime import date
+
 class category():
     # initialize the object
     def __init__(self, eachCategory, balance = 0):
@@ -5,7 +7,7 @@ class category():
         self.ledger = [{'total': balance}]
 
     def deposit(self, amount, description = ''):
-        self.ledger.append({'amount': amount, 'description': description})
+        self.ledger.append({'amount': amount, 'description': description, 'date': str(date.today())})
         self.ledger[0]['total'] = self.ledger[0]['total'] + amount
 
     # check if there is enough funds on the account
@@ -18,7 +20,7 @@ class category():
     def withdraw(self, amount, description=''):
         # check if there is enought funds
         if self.check_funds(amount) is True:
-            self.ledger.append({'amount': -amount, 'description': description})
+            self.ledger.append({'amount': -amount, 'description': description, 'date': str(date.today())})
             self.ledger[0]['total'] = self.ledger[0]['total'] - amount
             return True
         # return True if withdraw is successful. Return false if not
