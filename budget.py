@@ -1,4 +1,4 @@
-class Category():
+class category():
     # initialize the object
     def __init__(self, eachCategory, balance = 0):
         self.category = eachCategory
@@ -38,8 +38,8 @@ class Category():
     def get_balance(self, amount):
         print(f"Current Balance is {self.ledger[0]['total']}")
 
-A = Category('food')
-B = Category('Clothes', 500)
-A.deposit(100, 'pay check')
-A.transfer(200, B)
-print(A.ledger)
+# A = Category('food')
+# B = Category('Clothes', 500)
+# A.deposit(100, 'pay check')
+# A.transfer(200, B)
+# print(A.ledger)
