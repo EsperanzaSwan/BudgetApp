@@ -23,18 +23,20 @@ def check_ledger(item_category, budget_dict):
         the_item = category(item_category, amount)
     # if this is the first time creating the ledger or the category doesn't exist
     else:
-        amount = check_numeric('This category does not exist. Enter a opening balance to create:')
+        amount = input('This category does not exist. You can enter a opening balance to create or enter done to quit:')
+        if not amount.isnumeric():
+            return False
         amount = float(amount)
         the_item = category(category_input, amount)
         item_ledger = []
-    return the_item, item_ledger
+    results = [the_item, item_ledger]
+    return results
 
-# append previous ledger
+# "append_ledger" appends previous ledger
 def append_ledger(item, ledger_history):
     if len(ledger_history) > 0:
         for each_item in ledger_history:
             item.ledger.append(each_item)
-
 
 file_path = 'Ledger.json'
 # read the ledger json file if it exits, creates one if it doesn't
@@ -59,9 +61,11 @@ while True:
     if category_input == 'done':
         print('You have completed all the tasks.')
         break
-    # if the category already exists
-    [record_item, stored_ledger] = check_ledger(category_input, budget_dict)
-
+    # check if the category already exits
+    if not check_ledger(category_input, budget_dict):
+        break
+    else:
+        [record_item, stored_ledger] = check_ledger(category_input, budget_dict)
 
     while True:
         action_input = check_numeric('Please choose 1. deposit 2. withdraw 3. transfer 4. get balance 5. print statement 6. quit:')
@@ -85,7 +89,10 @@ while True:
             transfer_category = input('Please enter a category to transfer from:')
             transfer_category = transfer_category.strip()
             transfer_category = transfer_category.lower()
-            [transfer_item, transfer_item_ledger] = check_ledger(transfer_category, budget_dict)
+            if not check_ledger(transfer_category, budget_dict):
+                break
+            else:
+                [transfer_item, transfer_item_ledger] = check_ledger(transfer_category, budget_dict)
             transfer_amount = float(check_numeric('Please enter transfer amount:'))
             success_or_not = record_item.transfer(transfer_amount, transfer_item)
             # not enough funds. Transfer failed
