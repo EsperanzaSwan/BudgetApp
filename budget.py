@@ -6,6 +6,7 @@ class category():
         self.category = eachCategory
         self.ledger = [{'total': balance}]
 
+    # deposit the amount
     def deposit(self, amount, description = ''):
         self.ledger.append({'amount': amount, 'description': description, 'date': str(date.today())})
         self.ledger[0]['total'] = self.ledger[0]['total'] + amount
@@ -17,6 +18,7 @@ class category():
         else:
             return True
 
+    # withdraw the money
     def withdraw(self, amount, description=''):
         # check if there is enought funds
         if self.check_funds(amount) is True:
@@ -26,7 +28,7 @@ class category():
         # return True if withdraw is successful. Return false if not
         else:
             return False
-
+    # transfer funds
     def transfer(self, amount, anotherCategory):
         # check if there is enought funds
         if anotherCategory.check_funds(amount) is True:
@@ -37,8 +39,9 @@ class category():
         else:
             return False
 
-    def get_balance(self, amount):
-        print(f"Current Balance is {self.ledger[0]['total']}")
+    def get_balance(self):
+        message = f"Current Balance is {self.ledger[0]['total']}"
+        return message
 
 # A = Category('food')
 # B = Category('Clothes', 500)
