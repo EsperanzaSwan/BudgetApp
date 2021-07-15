@@ -65,7 +65,7 @@ while True:
         [record_item, stored_ledger] = check_ledger(category_input, budget_dict)
 
     while True:
-        action_input = check_numeric('Please choose 1. deposit 2. withdraw 3. transfer 4. get balance 5. quit:')
+        action_input = check_numeric('Please choose 1. deposit 2. withdraw 3. transfer 4. print statement 5. quit:')
         action_input = int(action_input)
         # deposit
         if action_input == 1:
@@ -102,6 +102,9 @@ while True:
 
         elif action_input == 4:
             print(f"{record_item.category}: {record_item.ledger[0]['total']} dollars")
+            temp_file = record_item.ledger[1:] + stored_ledger[1:]
+            for statement in temp_file:
+                print(statement)
 
         else:
             print(f'You have completed all the action for {category_input}')
