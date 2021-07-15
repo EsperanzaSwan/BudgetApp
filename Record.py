@@ -23,7 +23,7 @@ def check_ledger(item_category, budget_dict):
         the_item = category(item_category, amount)
     # if this is the first time creating the ledger or the category doesn't exist
     else:
-        amount = input('This category does not exist. You can enter a opening balance to create or enter done to quit:')
+        amount = input('The category does not exist. Enter amount to create or enter done to quit:')
         if not amount.isnumeric():
             return False
         amount = float(amount)
@@ -38,19 +38,16 @@ def append_ledger(item, ledger_history):
         for each_item in ledger_history:
             item.ledger.append(each_item)
 
+# load the previous created ledger
 file_path = 'Ledger.json'
-# read the ledger json file if it exits, creates one if it doesn't
 try:
     with open(file_path, 'r') as file_handle:
-        print('success')
+        # print('success')
         budget_dict = json.load(file_handle)
-        print(file_handle.tell())
 except Exception as err:
-    print(err)
+    # print(err)
     # there is no need to create a file if file doesn't exist, because I will need to update
     # the entire json file at the end
-    # with open(file_path, 'a') as file_handle:
-    #     print(f"file didn't exist or unable to read the json file. Create a new one")
     budget_dict = dict()
 
 while True:
@@ -68,7 +65,7 @@ while True:
         [record_item, stored_ledger] = check_ledger(category_input, budget_dict)
 
     while True:
-        action_input = check_numeric('Please choose 1. deposit 2. withdraw 3. transfer 4. get balance 5. print statement 6. quit:')
+        action_input = check_numeric('Please choose 1. deposit 2. withdraw 3. transfer 4. get balance 5. quit:')
         action_input = int(action_input)
         # deposit
         if action_input == 1:
@@ -102,6 +99,9 @@ while True:
             else:
                 append_ledger(transfer_item, transfer_item_ledger)
                 budget_dict[transfer_item.category] = transfer_item.ledger
+
+        elif action_input == 4:
+            print(f"{record_item.category}: {record_item.ledger[0]['total']} dollars")
 
         else:
             print(f'You have completed all the action for {category_input}')
