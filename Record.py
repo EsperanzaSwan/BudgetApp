@@ -32,12 +32,6 @@ def check_ledger(item_category, budget_dict):
     results = [the_item, item_ledger]
     return results
 
-# "append_ledger" appends previous ledger
-def append_ledger(item, ledger_history):
-    if len(ledger_history) > 0:
-        for each_item in ledger_history:
-            item.ledger.append(each_item)
-
 # load the previous created ledger
 file_path = 'Ledger.json'
 try:
@@ -94,12 +88,12 @@ while True:
                 print(f"{transfer_item.category} only has {transfer_item.ledger[0]['total']} dollars. Transfer failed.")
             # transfer successful, update transfer item's ledger as well
             else:
-                append_ledger(transfer_item, transfer_item_ledger)
+                transfer_item.ledger = transfer_item.ledger + transfer_item_ledger
                 budget_dict[transfer_item.category] = transfer_item.ledger
 
         elif action_input == 4:
             print(f"{record_item.category}: {record_item.ledger[0]['total']} dollars")
-            temp_file = record_item.ledger[1:] + stored_ledger[1:]
+            temp_file = record_item.ledger[1:] + stored_ledger
             for statement in temp_file:
                 print(statement)
 
@@ -108,7 +102,7 @@ while True:
             break
 
     # append previous ledger to the updated ledger
-    append_ledger(record_item, stored_ledger)
+    record_item.ledger = record_item.ledger + stored_ledger
     # update the category
     budget_dict[record_item.category] = record_item.ledger
 
