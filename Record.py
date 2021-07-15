@@ -42,12 +42,9 @@ def append_ledger(item, ledger_history):
 file_path = 'Ledger.json'
 try:
     with open(file_path, 'r') as file_handle:
-        # print('success')
         budget_dict = json.load(file_handle)
 except Exception as err:
     # print(err)
-    # there is no need to create a file if file doesn't exist, because I will need to update
-    # the entire json file at the end
     budget_dict = dict()
 
 while True:
