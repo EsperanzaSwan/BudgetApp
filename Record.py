@@ -44,7 +44,7 @@ try:
     with open(file_path, 'r') as file_handle:
         budget_dict = json.load(file_handle)
 except Exception as err:
-    # print(err)
+    print(err)
     budget_dict = dict()
 
 while True:
