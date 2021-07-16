@@ -83,6 +83,8 @@ class BudgetApp(tk.Tk):
         self.statement_button = ttk.Button(self, text = 'Show Statement', style = 'TButton',
                                            command = self.statement)
         self.statement_button.grid(column = 0, row = 8, **padding)
+        # self.s_output_label = ttk.Label(self)
+        # self.s_output_label.grid(column=0, row=9, **padding)
 
     def check_ledger(self):
         global budget_dict, stored_ledger
@@ -158,7 +160,14 @@ class BudgetApp(tk.Tk):
 
     def statement(self):
         global stored_ledger
-        temp_file = self.record_item.ledger + stored_ledger
+        statement_str = str()
+        temp_file = self.record_item.ledger[1:] + stored_ledger
+        print(temp_file)
+        for each_item in temp_file:
+            statement_str = statement_str + str(each_item) + '\n'
+        message_len = len(temp_file)
+        self.statement_message = tk.Message(self, text = statement_str)
+        self.statement_message.grid(column = 0, row = 9)
 
 if __name__ == "__main__":
     global budget_dict, stored_ledger
