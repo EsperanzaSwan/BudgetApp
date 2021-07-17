@@ -13,32 +13,33 @@ def check_numeric(screen_prompt):
     return user_input
 
 # "check_ledger" checks if a category is already in the ledger and creates the object accordingly
-def check_ledger(item_category, budget_dict):
+def check_ledger(item_category):
+    global budget_dict
     # if the category already exists
     if item_category in budget_dict.keys():
         amount = budget_dict[item_category][0]['total']
         # retrieve all the previous ledgers
-        item_ledger = budget_dict[item_category][1:]
+        stored_ledger = budget_dict[item_category][1:]
         # create the budget object
-        the_item = category(item_category, amount)
+        record_item = category(item_category, amount)
     # if this is the first time creating the ledger or the category doesn't exist
     else:
         amount = input('The category does not exist. Enter amount to create or enter done to quit:')
         if not amount.isnumeric():
             return False
         amount = float(amount)
-        the_item = category(category_input, amount)
-        item_ledger = []
-    results = [the_item, item_ledger]
-    return results
+        record_item = category(category_input, amount)
+        stored_ledger = []
+    return record_item, stored_ledger
 
 # load the previous created ledger
+global budget_dict
 file_path = 'Ledger.json'
 try:
     with open(file_path, 'r') as file_handle:
         budget_dict = json.load(file_handle)
 except Exception as err:
-    print(err)
+    # print(err)
     budget_dict = dict()
 
 while True:
@@ -50,10 +51,10 @@ while True:
         print('You have completed all the tasks.')
         break
     # check if the category already exits
-    if not check_ledger(category_input, budget_dict):
+    if not check_ledger(category_input):
         break
     else:
-        [record_item, stored_ledger] = check_ledger(category_input, budget_dict)
+        [record_item, stored_ledger] = check_ledger(category_input)
 
     while True:
         action_input = check_numeric('Please choose 1. deposit 2. withdraw 3. transfer 4. print statement 5. quit:')
@@ -69,22 +70,22 @@ while True:
             withdraw_amount = check_numeric('Please enter withdraw amount:')
             withdraw_amount = float(withdraw_amount)
             withdraw_description = input('Please enter the description for the withdraw:')
-            success_or_not = record_item.withdraw(withdraw_amount, withdraw_description)
-            if success_or_not is False:
+            record_item.withdraw(withdraw_amount, withdraw_description)
+            if record_item.indicator is False:
                 print(f"{record_item.category} only has {record_item.ledger[0]['total']} dollars. Withdraw failed.")
         # transfer
         elif action_input == 3:
             transfer_category = input('Please enter a category to transfer from:')
             transfer_category = transfer_category.strip()
             transfer_category = transfer_category.lower()
-            if not check_ledger(transfer_category, budget_dict):
+            if not check_ledger(transfer_category):
                 break
             else:
-                [transfer_item, transfer_item_ledger] = check_ledger(transfer_category, budget_dict)
+                [transfer_item, transfer_item_ledger] = check_ledger(transfer_category)
             transfer_amount = float(check_numeric('Please enter transfer amount:'))
-            success_or_not = record_item.transfer(transfer_amount, transfer_item)
+            record_item.transfer(transfer_amount, transfer_item)
             # not enough funds. Transfer failed
-            if success_or_not is False:
+            if record_item.indicator is False:
                 print(f"{transfer_item.category} only has {transfer_item.ledger[0]['total']} dollars. Transfer failed.")
             # transfer successful, update transfer item's ledger as well
             else:
