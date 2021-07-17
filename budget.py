@@ -5,10 +5,11 @@ class category():
     def __init__(self, eachCategory, balance = 0):
         self.category = eachCategory
         self.ledger = [{'total': balance}]
+        self.indicator = None
 
     # deposit the amount
     def deposit(self, amount, description = ''):
-        self.ledger.append({'amount': amount, 'description': description, 'date': str(date.today())})
+        self.ledger.insert(1, {'amount': amount, 'description': description, 'date': str(date.today())})
         self.ledger[0]['total'] = self.ledger[0]['total'] + amount
 
     # check if there is enough funds on the account
@@ -22,22 +23,23 @@ class category():
     def withdraw(self, amount, description=''):
         # check if there is enought funds
         if self.check_funds(amount) is True:
-            self.ledger.append({'amount': -amount, 'description': description, 'date': str(date.today())})
+            self.ledger.insert(1, {'amount': -amount, 'description': description, 'date': str(date.today())})
             self.ledger[0]['total'] = self.ledger[0]['total'] - amount
-            return True
+            self.indicator = True
         # return True if withdraw is successful. Return false if not
         else:
-            return False
+            self.indicator = False
+
     # transfer funds
     def transfer(self, amount, anotherCategory):
         # check if there is enought funds
         if anotherCategory.check_funds(amount) is True:
             anotherCategory.withdraw(amount, f'Transfer to {self.category}')
             self.deposit(amount, f'Transfer from {anotherCategory.category}')
-            return True
+            self.indicator = True
         # return True if withdraw is successful. Return false if not
         else:
-            return False
+            self.indicator = True
 
     def get_balance(self):
         message = f"Current Balance is {self.ledger[0]['total']}"
