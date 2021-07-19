@@ -39,7 +39,7 @@ class category():
             self.indicator = True
         # return True if withdraw is successful. Return false if not
         else:
-            self.indicator = True
+            self.indicator = False
 
     def get_balance(self):
         message = f"Current Balance is {self.ledger[0]['total']}"
