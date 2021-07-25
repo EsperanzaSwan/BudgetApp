@@ -108,5 +108,6 @@ class test_budget(unittest.TestCase):
         test_object = category('Food', 500)
         expected = 'Current Balance is 500'
         self.assertEqual(test_object.get_balance(), expected, 'The balance statement is incorrect')
+
 if __name__ == '__main__':
     unittest.main()
