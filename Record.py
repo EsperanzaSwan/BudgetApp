@@ -107,8 +107,7 @@ while True:
     # update the category
     budget_dict[record_item.category] = record_item.ledger
 
-# I need to update the entire file because I can't save multiple json objects, in other words, I can't
-# append the file. This will need improvement in the future, but will serve the purpose for right now.
+# save changes
 with open(file_path, 'w') as file_handle:
     json.dump(budget_dict, file_handle)
 

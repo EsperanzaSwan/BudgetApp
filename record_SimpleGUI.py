@@ -66,12 +66,6 @@ while True:
 
     if event in (sg.WIN_CLOSED, 'Exit'):
         break
-        # if 'record_item' in locals() and len(record_item.ledger) > 1:
-        #     button_value = sg.popup_yes_no(f'You have unsaved changes. Do you still want to exit?', font=('calibri', 15, 'bold'),
-        #                     title='')
-        #     if button_value == "yes":
-        #         break
-            # elif button_value == "no":
 
     elif event == '-CCONFIRM-':
         # check if the category exists
