@@ -13,7 +13,7 @@ cd <BudgetApp>
 poetry install
 ```
 
-Alternative you can use any other virtual environment e.g. pythons `venv`:
+Alternatively you can use any other virtual environment e.g. pythons `venv`:
 
 ```bash
 git clone git@github.com:EsperanzaSwan/BudgetApp.git
