@@ -43,3 +43,9 @@ pip install --user PySimpleGUI
 User Interface
 
 <img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/App_GUI.png>
+
+Choose a category then deposit, withraw or transfer funds from another category. Please click **Confirm** every time after performing an action. 
+
+Once you are done, click **Save Changes** to save the previous actions. You can click **Statement** to show the statment for the selected category. 
+
+<img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/Statement.png>
