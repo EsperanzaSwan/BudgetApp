@@ -4,6 +4,7 @@ from budget import category
 
 global stored_ledger, record_item
 
+# create statement window
 def statement():
     global stored_ledger, record_item
     temp_file = record_item.ledger + stored_ledger
