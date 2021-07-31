@@ -9,6 +9,7 @@ Download the file and run the app using the following command:
 
 ``` bash
 git clone https://github.com/EsperanzaSwan/BudgetApp.git
+# default folder name if no other name is given
 cd BudgetApp 
 python3 record_SimpleGUI.py
 ```
