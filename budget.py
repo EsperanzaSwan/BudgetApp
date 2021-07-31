@@ -26,7 +26,7 @@ class category():
             self.ledger.insert(1, {'amount': -amount, 'description': description, 'date': str(date.today())})
             self.ledger[0]['total'] = self.ledger[0]['total'] - amount
             self.indicator = True
-        # return True if withdraw is successful. Return false if not
+        # set to true if withdraw is successful. set to false if not
         else:
             self.indicator = False
 
@@ -37,7 +37,7 @@ class category():
             anotherCategory.withdraw(amount, f'Transfer to {self.category}')
             self.deposit(amount, f'Transfer from {anotherCategory.category}')
             self.indicator = True
-        # return True if withdraw is successful. Return false if not
+        # set to True if transfer is successful. set to false if not
         else:
             self.indicator = False
 
@@ -45,8 +45,3 @@ class category():
         message = f"Current Balance is {self.ledger[0]['total']}"
         return message
 
-# A = Category('food')
-# B = Category('Clothes', 500)
-# A.deposit(100, 'pay check')
-# A.transfer(200, B)
-# print(A.ledger)
