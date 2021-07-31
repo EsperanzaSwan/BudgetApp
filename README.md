@@ -18,12 +18,15 @@ If you receive an error message `No module named 'PySimpleGUI'`, you can install
 ``` bash
 pip3 install --user PySimpleGUI
 ```
+## Use the app
+
 User Interface
 
 <img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/App_GUI.png>
 
 Choose a category then deposit, withraw or transfer funds from another category. Please click **Confirm** every time after performing an action. 
 
-Once you are done, click **Save Changes** to save the previous actions. You can click **Statement** to show the statment for the selected category. 
+Once you are done, click **Save Changes** to save the previous actions. You can click **Statement** to show the statment for the selected category. The
+app saves all the data to a json file `ledger.json`.
 
 <img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/Statement.png>
