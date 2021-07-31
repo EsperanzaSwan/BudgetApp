@@ -68,7 +68,8 @@ class test_budget(unittest.TestCase):
         description = 'Buy food'
         withdraw_amount = 600
         actual_ledger = [{'total': opening_balance}]
-        self.assertFalse(test_object_A.withdraw(withdraw_amount, description), "the function didn't return false")
+        test_object_A.withdraw(withdraw_amount, description)
+        self.assertFalse(test_object_A.indicator, "the indicator is not set to false")
         self.assertEqual(test_object_A.ledger[0], actual_ledger[0], "the total didn't update correctly")
         self.assertEqual(test_object_A.ledger[1:], actual_ledger[1:], "the ledger record didn't update correctly")
 
@@ -83,7 +84,8 @@ class test_budget(unittest.TestCase):
                                 {'amount': -transfer_amount, 'description': 'Transfer to Food', 'date': str(date.today())}]
         transfer_to_ledger = [{'total': object_A_amount + transfer_amount},
                                 {'amount': transfer_amount, 'description': 'Transfer from Entertainment', 'date': str(date.today())}]
-        self.assertTrue(test_object_A.transfer(transfer_amount, test_object_B), "the function didn't return true")
+        test_object_A.transfer(transfer_amount, test_object_B)
+        self.assertTrue(test_object_A.indicator, "the indicator is not set to True")
         self.assertEqual(test_object_A.ledger[0], transfer_to_ledger[0], "the total of transferee didn't update correctly")
         self.assertEqual(test_object_B.ledger[0], transfer_from_ledger[0], "the total of transferor didn't update correctly")
         self.assertEqual(test_object_A.ledger[1:], transfer_to_ledger[1:], "the transferee's ledger record didn't update correctly")
@@ -98,7 +100,8 @@ class test_budget(unittest.TestCase):
         transfer_amount = 800
         transfer_from_ledger = [{'total': object_B_amount}]
         transfer_to_ledger = [{'total': object_A_amount}]
-        self.assertFalse(test_object_A.transfer(transfer_amount, test_object_B), "the function didn't return false")
+        test_object_A.transfer(transfer_amount, test_object_B)
+        self.assertFalse(test_object_A.indicator, "the indicator is not set to false")
         self.assertEqual(test_object_A.ledger[0], transfer_to_ledger[0], "the total of transferee didn't update correctly")
         self.assertEqual(test_object_B.ledger[0], transfer_from_ledger[0], "the total of transferor didn't update correctly")
         self.assertEqual(test_object_A.ledger[1:], transfer_to_ledger[1:], "the transferee's ledger record didn't update correctly")
