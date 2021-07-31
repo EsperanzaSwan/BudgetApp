@@ -1,5 +1,5 @@
 """
-This test module tests module budget.py
+This unit test module tests module budget.py
 
 """
 
