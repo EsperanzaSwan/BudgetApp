@@ -26,7 +26,7 @@ User Interface
 
 Choose a category then deposit, withraw or transfer funds from another category. Please click **Confirm** every time after performing an action. 
 
-Once you are done, click **Save Changes** to save the previous actions. You can click **Show Statement** to show the statment for the selected category. The
-app saves all the data to a json file `ledger.json`.
+You can click **Show Statement** to show the statement for the selected category. When you are done, click **Exit** to quit.
+When exiting, the app saves all the data to a json file `ledger.json`.
 
 <img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/Statement.png>

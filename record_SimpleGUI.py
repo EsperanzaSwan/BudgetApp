@@ -2,11 +2,11 @@ import PySimpleGUI as sg
 import json
 from budget import category
 
-global stored_ledger, record_item
+global stored_ledger
 
 # create statement window
 def statement():
-    global stored_ledger, record_item
+    global stored_ledger
     temp_file = record_item.ledger + stored_ledger
     file_size = len(temp_file)
     statement_str = str()
@@ -39,26 +39,25 @@ category_list = list(budget_dict.keys())
 sg.theme('DarkAmber')
 # define widgets
 layout = [[sg.Text('Please choose a category or enter a new one:', font=('calibri', 15, 'bold')),
-           sg.Combo(values=category_list, font=('calibri', 15), key='-CATEGORY-'),
+           sg.Combo(values=category_list, font=('calibri', 15), size = (10, 1), key='-CATEGORY-'),
            sg.Button(button_text='Confirm', font=('calibri', 13, 'bold'), key='-CCONFIRM-')],
           [sg.Text(size=(60, 1), font=('calibri', 15, 'bold'), key='-OUTPUT-')],
-          [sg.Text('Deposit: Amount:', font=('calibri', 15, 'bold'), size = (14, 1)),
+          [sg.Text('Deposit: Amount:', font=('calibri', 15, 'bold'), size = (15, 1)),
            sg.Input(font=('calibri', 15), key='-DAMOUNT-', size=(8, 1)),
            sg.Text('Description (optional)', font=('calibri', 15, 'bold'), size = (18,1)),
            sg.Input(font=('calibri', 15), key='-DDESCRIPTION-', size=(20, 1)),
            sg.Button(button_text='Confirm', font=('calibri', 13, 'bold'), key='-DCONFIRM-')],
-          [sg.Text('Withdraw: Amount', font=('calibri', 15, 'bold'), size = (14, 1)),
+          [sg.Text('Withdraw: Amount', font=('calibri', 15, 'bold'), size = (15, 1)),
            sg.Input(font=('calibri', 15), key='-WAMOUNT-', size=(8, 1)),
            sg.Text('Description (optional)', font=('calibri', 15, 'bold'), size = (18,1)),
            sg.Input(font=('calibri', 15), key='-WDESCRIPTION-', size=(20, 1)),
            sg.Button(button_text='Confirm', font=('calibri', 13, 'bold'), key='-WCONFIRM-')],
-          [sg.Text('Transfer: Amount', font=('calibri', 15, 'bold'), size = (14, 1)),
+          [sg.Text('Transfer: Amount', font=('calibri', 15, 'bold'), size = (15, 1)),
            sg.Input(font=('calibri', 15), key='-TAMOUNT-', size=(8, 1)),
            sg.Text('Choose Category:', font=('calibri', 15, 'bold'), size = (18,1)),
            sg.Combo(values=category_list, font=('calibri', 15), key='-TDESCRIPTION-', size=(19, 1), readonly='True'),
            sg.Button(button_text='Confirm', font=('calibri', 13, 'bold'), key='-TCONFIRM-')],
-          [sg.Button('Show Statement', pad=((220, 0), (15, 10)), font=('calibri', 13, 'bold'), key ='-SHOW-'),
-            sg.Button('Save Changes', pad=((10, 0), (15, 10)), font=('calibri', 13, 'bold'), key ='-SAVE-')],
+          [sg.Button('Show Statement', pad=((290, 0), (15, 10)), font=('calibri', 13, 'bold'), key ='-SHOW-')],
           [sg.Button('Exit', pad=((320, 0), (15, 10)), font=('calibri', 13, 'bold'))]]
 window = sg.Window('Budget App', layout)
 
@@ -66,7 +65,16 @@ while True:
     event, values = window.read()
 
     if event in (sg.WIN_CLOSED, 'Exit'):
-        break
+        try:
+            # update the ledger if we have made changes
+            record_item.ledger = record_item.ledger + stored_ledger
+            budget_dict[record_item.category] = record_item.ledger
+            with open(file_path, 'w') as file_handle:
+                json.dump(budget_dict, file_handle)
+        except:
+            pass
+        finally:
+            break
 
     elif event == '-CCONFIRM-':
         # check if the category exists
@@ -149,14 +157,5 @@ while True:
             window['-OUTPUT-'].update('Please select or create a category first')
         else:
             statement()
-
-    elif event == '-SAVE-':
-        if 'category_input' not in locals():
-            window['-OUTPUT-'].update('Please select or create a category first')
-        else:
-            record_item.ledger = record_item.ledger + stored_ledger
-            budget_dict[record_item.category] = record_item.ledger
-            with open(file_path, 'w') as file_handle:
-                json.dump(budget_dict, file_handle)
 
 window.close()
