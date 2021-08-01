@@ -15,7 +15,7 @@ def statement():
     statement_str = statement_str.replace('{', '')
     statement_str = statement_str.replace('}', '')
     statement_str = statement_str.replace("'", '')
-    print(statement_str)
+    # print(statement_str)
     layout = [[sg.Text(statement_str, size = (70, file_size + 2), key='-QUERY-', font = ('calibri', 15, 'bold'))]]
     window2 = sg.Window('Statement', layout)
     while True:
