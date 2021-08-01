@@ -22,7 +22,7 @@ pip3 install --user PySimpleGUI
 
 User Interface
 
-<img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/App_GUI.png>
+<img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/app_GUI.png>
 
 Choose a category then deposit, withraw or transfer funds from another category. Please click **Confirm** every time after performing an action. 
 
