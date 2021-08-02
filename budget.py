@@ -1,3 +1,10 @@
+'''
+
+This module defines class category, its atributes and methods such as
+deposit, withdraw, transfer.
+
+'''
+
 from datetime import date
 
 class category():

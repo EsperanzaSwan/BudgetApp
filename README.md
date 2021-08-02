@@ -1,9 +1,13 @@
 # Budget App - Developed Using PySimpleGUI
 
 This app tracks the deposit and spending in categories set by the user. It is developed with Python 3.8 and 
-PySimpleGUI 4.45.0. 
+PySimpleGUI 4.45.0. The project contains four files. `Budget.py` defines class `category` and methods including
+deposit, withdraw and transfer. `record_SimpleGUI.py` defines the user interface. `test_budget.py` is the unit test module.
+`Ledger.json` stores all the data. 
 
-## Run the app
+## 
+
+## Installation
 
 Download the file and run the app using the following command:
 
@@ -18,7 +22,7 @@ If you receive an error message `No module named 'PySimpleGUI'`, you can install
 ``` bash
 pip3 install --user PySimpleGUI
 ```
-## Use the app
+## Run the app
 
 User Interface
 
