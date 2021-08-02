@@ -1,7 +1,7 @@
 # Budget App - Developed Using PySimpleGUI
 
 This app tracks the deposit and spending in categories set by the user. It is developed with Python 3.8 and 
-PySimpleGUI 4.45.0. The project contains four files. `Budget.py` defines class `category` and methods including
+PySimpleGUI 4.45.0. The project contains four files. `Budget.py` defines class `category` and methods such as
 deposit, withdraw and transfer. `record_SimpleGUI.py` defines the user interface. `test_budget.py` is the unit test module.
 `Ledger.json` stores all the data. 
 
