@@ -12,7 +12,7 @@ deposit, withdraw and transfer. `record_SimpleGUI.py` defines the user interface
 Download the file and run the app using the following command:
 
 ``` bash
-git clone https://github.com/EsperanzaSwan/BudgetApp.git
+git clone https://github.com/M-Theresa/BudgetApp.git
 # default folder name if no other name is given
 cd BudgetApp 
 python3 record_SimpleGUI.py
@@ -26,11 +26,11 @@ pip3 install --user PySimpleGUI
 
 User Interface
 
-<img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/app_GUI.png>
+<img src = https://github.com/M-Theresa/BudgetApp/blob/59c41a40d113d7cbe89a7a17dcc60a4deeeaff02/app_GUI.png>
 
 Choose a category then deposit, withraw or transfer funds from another category. Please click **Confirm** every time after performing an action. 
 
 You can click **Show Statement** to show the statement for the selected category. When you are done, click **Exit** to quit.
 When exiting, the app saves all the data to a json file `ledger.json`.
 
-<img src = https://github.com/EsperanzaSwan/BudgetApp/blob/master/Statement.png>
+<img src = https://github.com/M-Theresa/BudgetApp/blob/59c41a40d113d7cbe89a7a17dcc60a4deeeaff02/Statement.png>
