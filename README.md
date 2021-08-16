@@ -5,8 +5,6 @@ PySimpleGUI 4.45.0. The project contains four files. `Budget.py` defines class `
 deposit, withdraw and transfer. `record_SimpleGUI.py` defines the user interface. `test_budget.py` is the unit test module.
 `Ledger.json` stores all the data. 
 
-## 
-
 ## Installation
 
 Download the file and run the app using the following command:
@@ -15,14 +13,11 @@ Download the file and run the app using the following command:
 git clone https://github.com/M-Theresa/BudgetApp.git
 # default folder name if no other name is given
 cd BudgetApp 
+poetry install
 python3 record_SimpleGUI.py
 ```
-If you receive an error message `No module named 'PySimpleGUI'`, you can install PySimpleGUI:
 
-``` bash
-pip3 install --user PySimpleGUI
-```
-## Run the app
+## Use the app
 
 User Interface
 
